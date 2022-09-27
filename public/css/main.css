@@ -167,6 +167,8 @@ button.hipster:hover {
 }
 button.block {
   width: 30%;
+  display: block;
+  margin-left: auto;
 }
 
 /*************
