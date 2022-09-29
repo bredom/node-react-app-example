@@ -27,10 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Test middleware
-/* app.use((req, res, next) => {
-  console.log(req.headers);
+app.use((req, res, next) => {
+  console.log(path.resolve(__dirname, 'client'));
   next();
-}); */
+});
 
 // Routes
 app.get('/api/v1', (req, res) => {
