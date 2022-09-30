@@ -24,13 +24,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Static folder
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 //Test middleware
-app.use((req, res, next) => {
-  console.log(path.resolve(__dirname, 'client'));
+/* app.use((req, res, next) => {
+  console.log(path.join(__dirname, '../client/build'));
   next();
-});
+}); */
 
 // Routes
 app.get('/api/v1', (req, res) => {
@@ -42,10 +43,14 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/tasks', require('./routes/tasks'));
 app.use('/api/v1/products', require('./routes/products'));
 
-//Handling wrong address
-app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
+
+//Handling wrong address
+/* app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
+}); */
 
 // Global Error Handler
 app.use(errorHandler);
