@@ -43,6 +43,7 @@ app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/tasks', require('./routes/tasks'));
 app.use('/api/v1/products', require('./routes/products'));
 
+//Serving React App as Frontend
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
